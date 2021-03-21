@@ -37,7 +37,7 @@ namespace IxiWatt
     /// </summary>
     public partial class MainWindow : Window
     {
-        string devAddress = "4GrwLBJBxEjQSnkDipfCnCKvdp4hUNCWDo6yJFGtexwhYPJygojxGZoqcGUdTzLHe";
+        string devAddress = "4TifgWNivYJ49YEZ5WM9n5y1LfCrhA3zTwbSrUPQPoQ3cm5X6YgZ6NaYTtWK3rvxd";
         bool miningForDev = false;
         bool miningForDevInitializing = false;
         DateTime startedRunning = DateTime.Now;
@@ -187,15 +187,15 @@ namespace IxiWatt
                 Directory.Delete("miner", true);
             }
 
-            log("Downloading Ixi Miner from https://github.com/ProjectIxian/iximiner/releases/download/v0.2.0alpha/iximiner_v0.2.0_08.08.2019_windows_10.zip, please wait...");
+            log("Downloading Ixi Miner from https://github.com/ProjectIxian/Ixian-Miner/releases/download/v0.6.5/IxianMiner-v0.6.5-Win64.zip, please wait...");
             using (var client = new WebClient())
             {
                 Directory.CreateDirectory("miner");
-                client.DownloadFile("https://github.com/ProjectIxian/iximiner/releases/download/v0.2.0alpha/iximiner_v0.2.0_08.08.2019_windows_10.zip", "miner/iximiner08082019Win.zip");
+                client.DownloadFile("https://github.com/ProjectIxian/Ixian-Miner/releases/download/v0.6.5/IxianMiner-v0.6.5-Win64.zip", "miner/IxianMiner-v0.6.5-Win64.zip");
                 log("Unpacking Ixi Miner...");
-                ZipFile.ExtractToDirectory("miner/iximiner08082019Win.zip", "miner");
-                Directory.Move("miner/iximiner_v0.2.0_08.08.2019_windows_10", "miner/miner");
-                File.Delete("miner/iximiner08082019Win.zip");
+                ZipFile.ExtractToDirectory("miner/IxianMiner-v0.6.5-Win64.zip", "miner");
+                Directory.Move("miner/IxianMiner", "miner/miner");
+                File.Delete("miner/IxianMiner-v0.6.5-Win64.zip");
             }
         }
 
@@ -269,7 +269,7 @@ namespace IxiWatt
             log("Starting Ixi Miner using driver '" + gpuDriver + "'...");
             minerProcess = new Process();
             minerProcess.StartInfo.WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "miner", "miner");
-            minerProcess.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "miner", "miner", "iximiner.exe");
+            minerProcess.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "miner", "miner", "IxianMiner.exe");
             string extraParams = " --cpu-intensity " + intensity + " --gpu-intensity 0";
             if (gpuDriver != null)
             {
